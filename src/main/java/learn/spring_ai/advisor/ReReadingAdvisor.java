@@ -31,6 +31,7 @@ public class ReReadingAdvisor implements BaseAdvisor {
 
     @Override
     public ChatClientRequest before(ChatClientRequest chatClientRequest, AdvisorChain advisorChain) {
+        System.out.println("-------------------ReReadingAdvisor before method called------------------");
         String augmentedUserText = PromptTemplate.builder()
                 .template(this.re2AdviseTemplate)
                 .variables(Map.of("re2_input_query", chatClientRequest.prompt().getUserMessage().getText()))
