@@ -5,6 +5,7 @@ import learn.spring_ai.advisor.Response;
 import learn.spring_ai.advisor.SimpleLoggerAdvisor;
 import learn.spring_ai.tools.DateTime;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/chatmemory")
-public class MessageChatMemoryAdvisor {
+public class MessageChatMemoryAdvisorController {
 
     private final ChatClient chatClient;
 
     @Autowired
-    public MessageChatMemoryAdvisor(ChatModel chatModel,
-                                    ChatMemory chatMemory) {
+    public MessageChatMemoryAdvisorController(ChatModel chatModel,
+                                              ChatMemory chatMemory) {
 
-        org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor memoryAdvisor = org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor.builder(chatMemory).order(1).build();
+        MessageChatMemoryAdvisor memoryAdvisor = MessageChatMemoryAdvisor.builder(chatMemory).order(1).build();
 
         this.chatClient = ChatClient.builder(chatModel)
                 .defaultAdvisors(List.of(
